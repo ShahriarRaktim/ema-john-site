@@ -4,3 +4,12 @@
     margin-left: 10%;
     border-bottom: 1px solid gray;
 }
+.btn-regular{
+    padding: 7px 13px;
+    font-size: 0.9em;
+    background-color: goldenrod;
+    border: 1px solid rgb(133, 129, 129);
+    margin-bottom: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
