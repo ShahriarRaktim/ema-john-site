@@ -24,8 +24,8 @@ const Shop = () => {
       for (const key in stored) {
         const addProduct = products.find((product) => product.key === key);
         if (addProduct) {
-          const quantitis = stored[key];
-          addProduct.quantity = quantitis;
+          const quantity = stored[key];
+          addProduct.quantity = quantity;
           storedCart.push(addProduct);
         }
       }
@@ -43,7 +43,7 @@ const Shop = () => {
     const text = event.target.value;
     const matchProducts = products.filter(product => product.name.toLowerCase().includes(text.toLowerCase()))
     setDisplayProduct(matchProducts);
-    console.log(matchProducts.length)
+    // console.log(matchProducts.length)
   }
   return (
     <div>

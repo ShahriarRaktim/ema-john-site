@@ -12,4 +12,5 @@
 .search-container input{
     width: 60%;
     line-height: 25px;
+    font-size: medium;
 }
