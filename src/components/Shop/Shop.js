@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Product from "../../../Product/Product";
-import { addToDb, getStoredCart } from "../../../utilities/fakedb";
-import Cart from "../../Cart/Cart";
+import Product from "../Product/Product";
+import { addToDb, getStoredCart } from "../../utilities/fakedb";
+import Cart from "../Cart/Cart";
 import "./Shop.css";
 
 const Shop = () => {
