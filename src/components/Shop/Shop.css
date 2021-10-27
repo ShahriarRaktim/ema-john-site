@@ -14,3 +14,10 @@
     line-height: 25px;
     font-size: medium;
 }
+.pagination button{
+    padding: 5px;
+    margin: 10px;
+}
+.pagination .selected{
+    background-color: blue;
+}

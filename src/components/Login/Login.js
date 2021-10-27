@@ -1,9 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import UseAuth from "../Hooks/UseAuth";
 
 const Login = () => {
   const {googleSignIn} = UseAuth();
+  const location = useLocation();
+  const history = useHistory();
+  const redirect_url = location.state?.from || '/shop';
+
+  const handleGoogleSignin = () =>{
+    googleSignIn()
+    .then((result) => {
+      history.push(redirect_url)
+    })
+  }
   return (
     <div>
       <h1>Please Log In</h1>
@@ -22,7 +32,7 @@ const Login = () => {
         <Link to="/register">Create account</Link>
       </h3>
       <h4>Or</h4>
-      <button onClick={googleSignIn} className="btn-regular">Google Sign In</button>
+      <button onClick={handleGoogleSignin} className="btn-regular">Google Sign In</button>
     </div>
   );
 };

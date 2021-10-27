@@ -1,0 +1,10 @@
+.form input{
+    padding: 1px 8px;
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: 10px 10px 20px rgba(209, 207, 207, 0.459);
+    background-color: gainsboro;
+    width: 50%;
+    line-height: 30px;
+    border-radius: 10px;
+}

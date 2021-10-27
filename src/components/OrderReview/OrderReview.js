@@ -7,8 +7,7 @@ import UseProducts from "../Hooks/UseProducts";
 import ReviewItem from "../ReviewItem/ReviewItem";
 
 const OrderReview = () => {
-  const [products, setProducts] = UseProducts();
-  const [cart, setCart] = UseCarts(products);
+  const [cart, setCart] = UseCarts();
   const history = useHistory();
   const removeHandler = (key) =>{
       removeFromDb(key)
@@ -16,9 +15,9 @@ const OrderReview = () => {
       setCart(newCart);
   }
   const handleBtn = () =>{
-        history.push('/placeorder');
-        setCart([]);
-        clearTheCart()
+        history.push('/shipping');
+        // setCart([]);
+        // clearTheCart()
   }
   return (
     <div>
@@ -34,7 +33,7 @@ const OrderReview = () => {
         </div>
         <div className="cart-container">
           <Cart products={cart}>
-              <button onClick={handleBtn} className='btn-regular'>Place Order</button>
+              <button onClick={handleBtn} className='btn-regular'>Proceed to Shipping</button>
           </Cart>
         </div>
       </div>

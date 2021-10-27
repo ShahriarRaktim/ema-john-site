@@ -4,37 +4,44 @@ import { addToDb, getStoredCart } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import "./Shop.css";
 import { NavLink } from "react-router-dom";
+import UseCarts from "../Hooks/UseCarts";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = UseCarts();
   const [displayProduct, setDisplayProduct] = useState([]);
+  const [page, setPage] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const size = 10;
 
   useEffect(() => {
-    fetch("./products.JSON")
+    fetch(`http://localhost:5000/products?page=${page}&&size=${size}`)
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
-        setDisplayProduct(data);
+        setProducts(data.products);
+        setDisplayProduct(data.products);
+        const count = data.count;
+        const pageNumber = Math.ceil(count/size);
+        setPageCount(pageNumber);
       });
-  }, []);
-  useEffect(() => {
-    if (products.length) {
-      const savedCart = getStoredCart();
-      const storedCart = [];
-      for (const key in savedCart) {
-        console.log(key)
-        const addProduct = products.find((product) => product.key === key);
-        if (addProduct) {
-          const quantity = savedCart[key];
-          addProduct.quantity = quantity;
-          storedCart.push(addProduct);
-        }
-      }
+  }, [page]);
+  // useEffect(() => {
+  //   if (products.length) {
+  //     const savedCart = getStoredCart();
+  //     const storedCart = [];
+  //     for (const key in savedCart) {
+  //       const addProduct = products.find((product) => product.key === key);
+  //       if (addProduct) {
+  //         const quantity = savedCart[key];
+  //         addProduct.quantity = quantity;
+  //         storedCart.push(addProduct);
+         
+  //       }
+  //     }
 
-      setCart(storedCart);
-    }
-  }, [products]);
+  //     setCart(storedCart);
+  //   }
+  // }, [products]);
 
   const handleAddtoCart = (product) => {
     const exists = cart.find(pd=> pd.key === product.key);
@@ -77,6 +84,15 @@ const Shop = () => {
               product={product}
             ></Product>
           ))}
+          <div className="pagination">
+            {
+              [...Array(pageCount).keys()].map(number=><button
+              className={number === page ? 'selected' : ''}
+                 key={number.key}
+              onClick={()=>setPage(number)}
+              >{number+1}</button>)
+            }
+          </div>
         </div>
         <div className="cart-container">
           <Cart products={cart}>
