@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signOut,
+  getIdToken
 } from "firebase/auth";
 import firebaseInitializeApp from "../Firebase/firebase.init";
 
@@ -27,11 +28,14 @@ const UseFirebase = () => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        getIdToken(user)
+        .then(idToken => localStorage.setItem('idToken', idToken))
         setUser(user);
       }
     });
+    return () => unsubscribe;
   }, []);
 
   return {

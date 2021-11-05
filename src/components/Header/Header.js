@@ -13,6 +13,7 @@ const Header = () => {
                 <NavLink to="./shop">Shop</NavLink>
                 <NavLink to="./order">Order Review</NavLink>
                 <NavLink to="./inventory">Manage Inventory here</NavLink>
+                {user.email && <NavLink to="./myorder">MyOrder</NavLink>}
                {
                     user.email ?
                     <>
